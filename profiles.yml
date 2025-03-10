@@ -1,0 +1,14 @@
+titanic:
+    target: titanic_dev
+    outputs:
+        titanic_dev:
+        type: snowflake
+        account: <your_account_prefix>
+        warehouse: transforming
+        database: analytics
+        user: <your_username>
+        password: <your_password>
+        role: transformer
+        schema: aaa_titanic_<your_name>
+        threads: 10
+        type: snowflake
