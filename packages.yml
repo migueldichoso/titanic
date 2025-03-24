@@ -1,0 +1,4 @@
+packages:
+
+- git: "https://github.com/estie-inc/dbt_snowflake_ml.git"
+  revision: main

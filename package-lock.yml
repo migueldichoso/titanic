@@ -1,0 +1,4 @@
+packages:
+  - git: https://github.com/estie-inc/dbt_snowflake_ml.git
+    revision: bd445d1fd307d42674887868e238eb5835365fd8
+sha1_hash: 7ff4ec1b9bdb1a642f6e6bd90061c1f5ba96d0b6
