@@ -16,6 +16,7 @@ def model(dbt, session):
     materialized="table",
     python_version="3.11",
     packages=["snowflake-ml-python", "pandas", "scikit-learn"],
+    schema="predict"
   )
 
   dataset = dbt.ref("titanic3")
@@ -29,7 +30,7 @@ def model(dbt, session):
 
   reg = registry.Registry(session=session)
 
-  model_ref = dbt.ref("train_model")
+  model_ref = dbt.ref("train")
   mv = reg.get_model(model_ref.table_name).default
   data["PREDICTED"] = mv.run(x, function_name="PREDICT")
 
@@ -42,7 +43,7 @@ def model(dbt, session):
 # this part is dbt logic for get ref work, do not modify
 
 def ref(*args, **kwargs):
-    refs = {"titanic3": "analytics.aaa_titanic_miguel.titanic3", "train_model": "analytics.aaa_titanic_miguel.train_model"}
+    refs = {"titanic3": "analytics.aaa_titanic_demo.titanic3", "train": "analytics.aaa_titanic_demo_train.train"}
     key = '.'.join(args)
     version = kwargs.get("v") or kwargs.get("version")
     if version:
@@ -71,11 +72,11 @@ class config:
 class this:
     """dbt.this() or dbt.this.identifier"""
     database = "analytics"
-    schema = "aaa_titanic_miguel"
+    schema = "aaa_titanic_demo_predict"
     identifier = "predict"
     
     def __repr__(self):
-        return 'analytics.aaa_titanic_miguel.predict'
+        return 'analytics.aaa_titanic_demo_predict.predict'
 
 
 class dbtObj:
